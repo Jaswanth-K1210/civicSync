@@ -8,7 +8,11 @@ import { CATEGORIES, OPEN, ACTIONS, CITIZEN_REPLY_HOURS, checkAction, distanceM,
 
 const PORT = process.env.PORT || 5050;
 const SECRET = process.env.SECRET || 'civicsync-dev-secret';
-await mongoose.connect(process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/civicsync');
+await mongoose.connect(process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/civicsync', { serverSelectionTimeoutMS: 15000 }).catch((e) => {
+  console.error('MongoDB connection failed:', e.message);
+  console.error('Check MONGO_URL, and in Atlas -> Network Access allow 0.0.0.0/0 so Render can connect.');
+  process.exit(1);
+});
 
 // ---------- models ----------
 const User = mongoose.model('User', new mongoose.Schema({
