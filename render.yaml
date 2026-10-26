@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: civicsync-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_URL
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: SECRET
+        generateValue: true

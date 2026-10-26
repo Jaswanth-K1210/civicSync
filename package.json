@@ -1,0 +1,11 @@
+{
+  "name": "civicsync",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix server i && npm --prefix client i && npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "dev": "npm --prefix server start & npm --prefix client run dev",
+    "test": "npm --prefix server test",
+    "reset": "mongosh --quiet civicsync --eval 'db.dropDatabase()'"
+  }
+}
